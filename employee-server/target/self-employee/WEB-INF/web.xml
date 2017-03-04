@@ -1,0 +1,28 @@
+<web-app>
+
+    <!-- this web.xml is to be bound with the spring config file, the loader of in.selfwebapp.practice.beans -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- the listener listens to the context and loads the spring config file -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:config/application-*.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>CXFServlet</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+    </servlet>
+
+    <!-- whenever we enter some url
+        FLOW:
+        requests come to web.xml and tomcat redirects it to the desired in.selfwebapp.practice.api
+        the url gets mapped here with servlet-name and servlet-name gets mapped to sevlet class to run -->
+    <servlet-mapping>
+        <servlet-name>CXFServlet</servlet-name>
+        <url-pattern>/webapp/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
